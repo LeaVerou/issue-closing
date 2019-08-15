@@ -8,7 +8,10 @@
 	<link rel="stylesheet" href="style.css">
 </head>
 <body>
-	<div mv-app="issueClosing" mv-source="https://api.github.com/repos/[repo]/issues?state=closed&sort=updated&labels=[labels]&per_page=100" mv-mode="read" mv-plugins="sort">
+	<div mv-app="issueClosing"
+	     mv-source="https://api.github.com/repos/[repo]/issues?state=closed&sort=updated&labels=[labels]&per_page=100"
+	     mv-mode="read" mv-plugins="sort"
+	     style="--short: [count(timeToClose > month())]; --long: [count(timeToClose < day())];">
 		<header>
 			<h1><a href="?repo=[repo]" title="Click for permalink">Github Issue Closing Times</a></h1>
 			<form mv-action="set(repo, repoInput), set(labels, labelFilter)">
@@ -39,13 +42,16 @@
 		</dl>
 
 		<details open>
-			<summary>Based on [count(issue)] most recently updated issues</summary>
-		<div mv-multiple property="issue">
-			<a class="issue-number" href="https://github.com/[repo]/issues/[number]" title="[title]" target="_blank">#[number]</a>
-			took
-			<span property="timeToClose" mv-attribute="content" content="[closed_at - created_at]" class="[if(timeToClose > month(), 'long', if (timeToClose < day(), 'short'))]">[duration(timeToClose)]</span>
-		</div>
+			<summary>
+				Based on [count(issue)] most recently updated issues
+			</summary>
+			<div mv-multiple property="issue">
+				<a class="issue-number" href="https://github.com/[repo]/issues/[number]" title="[title]" target="_blank">#[number]</a>
+				took
+				<span property="timeToClose" mv-attribute="content" content="[closed_at - created_at]" class="[if(timeToClose > month(), 'long', if (timeToClose < day(), 'short'))]">[duration(timeToClose)]</span>
+			</div>
 		</details>
+
 		<div class="mv-bar mv-ui"></div>
 		<datalist id="label-suggestions">
 			<option mv-multiple mv-value="unique(issue.labels.name)"></option>

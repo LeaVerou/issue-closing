@@ -1,5 +1,7 @@
 body {
 	font: 100%/1.5 Helvetica, Segoe UI, sans-serif;
+	--long-color: hsl(0, 100%, 45%);
+	--short-color: hsl(80, 80%, 35%);
 }
 
 h1 {
@@ -61,49 +63,73 @@ dl {
 	grid-auto-flow: column;
 }
 
-dl, dt, dd {
-	border: 1px solid rgba(0,0,0,.1);
-}
+	dl, dt, dd {
+		border: 1px solid rgba(0,0,0,.1);
+	}
 
-dt, dd {
-	border-width: 0 1px 1px 0;
-	padding: .3rem .5rem;
-}
+	dt, dd {
+		border-width: 0 1px 1px 0;
+		padding: .3rem .5rem;
+	}
 
-dt {
-	background: rgba(0,0,0,.03);
-}
+	dt {
+		background: rgba(0,0,0,.03);
+	}
 
-dd {
-	margin: 0;
-	font-size: 200%;
-}
+	dd {
+		margin: 0;
+		font-size: 200%;
+	}
 
 summary {
+	position: relative;
 	column-span: all;
 	margin-bottom: .5em;
-	opacity: .6;
 	font-style: italic;
+	color: hsl(220, 10%, 50%);
+	--summary-stops: var(--short-color) calc(var(--short, 0) * 1%), hsl(220, 10%, 75%) 0, hsl(220, 10%, 75%) calc(100% - var(--long, 0) * 1%), var(--long-color) 0;
+
+}
+
+@supports (background: conic-gradient(red, red)) {
+	summary::after {
+		content: "";
+		position: absolute;
+		width: 2em;
+		height: 2em;
+		top: 0;
+		right: 0;
+		border-radius: 50%;
+		background: conic-gradient(var(--summary-stops));
+	}
+}
+
+@supports not (background: conic-gradient(red, red)) {
+	summary {
+		border-bottom: 10px solid transparent;
+		background: linear-gradient(to right, var(--summary-stops)) bottom / auto 5px no-repeat border-box;
+	}
 }
 
 details {
 	column-width: 13em;
+
 }
 
-details > div {
-	margin: .3em 0;
-}
+	details > div {
+		margin: .3em 0;
+	}
 
 [property=timeToClose] {
 	font-weight: bold;
 }
 
 .long {
-	color: hsl(0, 100%, 45%);
+	color: var(--long-color);
 }
 
 .short {
-	color: hsl(80, 80%, 35%);
+	color: var(--short-color);
 }
 
 a.issue-number {
@@ -116,18 +142,18 @@ a.issue-number {
 	text-decoration: none;
 }
 
-a.issue-number:visited {
-	background: hsl(280, 20%, 90%);
-}
+	a.issue-number:visited {
+		background: hsl(280, 20%, 90%);
+	}
 
-a.issue-number:hover {
-	background: hsl(220, 20%, 50%);
-	color: white;
-}
+	a.issue-number:hover {
+		background: hsl(220, 20%, 50%);
+		color: white;
+	}
 
-a.issue-number:visited:hover {
-	background: hsl(280, 20%, 50%);
-}
+	a.issue-number:visited:hover {
+		background: hsl(280, 20%, 50%);
+	}
 
 .mv-bar.mv-ui {
 	margin-top: 1em;
