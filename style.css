@@ -17,7 +17,15 @@ header {
 		text-align: center;
 	}
 
-	form > div, 
+		h1 a {
+			color: inherit;
+		}
+
+		h1 a:not(:hover):not(:active) {
+			text-decoration: none;
+		}
+
+	form > div,
 	form > div label {
 		display: flex;
 		align-items: center;
