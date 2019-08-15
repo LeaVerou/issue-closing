@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Github issue closing times</title>
+  <link rel='stylesheet' href='https://dev.mavo.io/dist/mavo.css'>
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<div mv-app="issueClosing" mv-source="https://api.github.com/repos/[repo]/issues?state=closed&sort=updated&labels=[labels]&per_page=100" mv-mode="read" mv-plugins="sort">
+	<header>
+		<h1>Github Issue Closing Times</h1>
+		<form mv-action="set(repo, repoInput), set(labels, labelFilter)">
+			<div>
+				<label>Repo: <input property="repoInput" mv-default="[repoDefault]"></label>
+				<button>Go!</button>
+			</div>
+			Show: 
+			<label><input type="radio" property="labelFilter" name="labels" checked value=""> All</label>
+			<label><input type="radio" name="labels" value="bug"> Bugs only</label>
+			<label><input type="radio" name="labels" value="enhancement"> Enhancements only</label>
+			<label><input type="radio" name="labels" value="[customLabel]"> Label <input property="customLabel" list="label-suggestions"></label>
+			<meta property="repoDefault" content="[url('repo') or 'mavoweb/mavo']">
+			<meta property="repo" mv-default="[repoDefault]">
+			<meta property="labels" content="">
+		</form>
+	</header>
+	
+	<dl>
+		<dt>Median</dt>
+		<dd>[duration(median(timeToClose))]</dd>
+		<dt>Average</dt>
+		<dd>[duration(average(timeToClose))]</dd>
+		<dt>Slowest</dt>
+		<dd>[duration(max(timeToClose))]</dd>
+		<dt>Fastest</dt>
+		<dd>[duration(min(timeToClose))]</dd>
+	</dl>
+	
+	<details open>
+		<summary>Based on [count(issue)] most recently updated issues</summary>
+	<div mv-multiple property="issue">
+		<a class="issue-number" href="https://github.com/[repo]/issues/[number]" title="[title]" target="_blank">#[number]</a> 
+		took 
+		<span property="timeToClose" mv-attribute="content" content="[closed_at - created_at]" class="[if(timeToClose > month(), 'long', if (timeToClose < day(), 'short'))]">[duration(timeToClose)]</span>
+	</div>
+	</details>
+	<div class="mv-bar mv-ui"></div>
+	<datalist id="label-suggestions">
+		<option mv-multiple mv-value="unique(issue.labels.name)"></option>
+	</datalist>
+</div>
+<!-- partial -->
+  <script src='https://dev.mavo.io/dist/mavo.js'></script>
+
+</body>
+</html>
