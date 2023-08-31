@@ -1,7 +1,7 @@
 body {
 	font: 100%/1.5 Helvetica, Segoe UI, sans-serif;
-	--long-color: hsl(0, 100%, 45%);
-	--short-color: hsl(80, 80%, 35%);
+	--long-color: hsl(80, 80%, 35%);
+	--short-color: hsl(0, 100%, 45%);
 }
 
 h1 {
