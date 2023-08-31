@@ -17,7 +17,7 @@
 			<form mv-action="set(repo, repoInput), set(labels, labelFilter)">
 				<div>
 					<label>Repo: <input property="repoInput" mv-default="[repoDefault]"></label>
-					<button>Go!</button>
+					<button disabled="[if(!(len(repoInput) >= 3 and contains(repoInput, '/')))]">Go!</button>
 				</div>
 				Show:
 				<label><input type="radio" property="labelFilter" name="labels" checked value=""> All</label>
