@@ -16,7 +16,7 @@
 			<h1><a href="?repo=[repo]" title="Click for permalink">GitHub Issue Closing Times</a></h1>
 			<form mv-action="set(repo, repoInput), set(labels, labelFilter)">
 				<p class="mv-message mv-warning mv-inline" mv-if="!(len(repoInput) >= 3 and contains(repoInput, '/'))">
-					The entered repository name is not value. Please enter it in the format <code>organisation/repository</code>
+					The entered repository name is not valid. Please enter it in the format <code>organisation/repository</code>
 				</p>
 				<div>
 					<label>Repo: <input property="repoInput" mv-default="[repoDefault]"></label>
