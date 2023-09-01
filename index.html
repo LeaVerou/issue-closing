@@ -6,19 +6,14 @@
 	<script src="https://get.mavo.io/mavo.js"></script>
 	<link rel="stylesheet" href="https://get.mavo.io/mavo.css">
 	<link rel="stylesheet" href="style.css">
-	<script>
-		Mavo.Functions.trim = function(string) {
-			return string.trim();
-		}
-	</script>
 </head>
 <body>
 	<div mv-app="issueClosing"
-	     mv-source="https://api.github.com/repos/[trim(repo)]/issues?state=closed&sort=updated&labels=[labels]&per_page=100"
+	     mv-source="https://api.github.com/repos/[repo.trim()]/issues?state=closed&sort=updated&labels=[labels]&per_page=100"
 	     mv-mode="read" mv-plugins="sort"
 	     style="--short: [count(timeToClose > month())]; --long: [count(timeToClose < day())];">
 		<header>
-			<h1><a href="?repo=[trim(repo)]" title="Click for permalink">GitHub Issue Closing Times</a></h1>
+			<h1><a href="?repo=[repo.trim()]" title="Click for permalink">GitHub Issue Closing Times</a></h1>
 			<form mv-action="set(repo, repoInput), set(labels, labelFilter)">
 				<div>
 					<label>Repo: <input property="repoInput" mv-default="[repoDefault]"></label>
@@ -29,7 +24,7 @@
 				<label><input type="radio" name="labels" value="bug"> Bugs only</label>
 				<label><input type="radio" name="labels" value="enhancement"> Enhancements only</label>
 				<label><input type="radio" name="labels" value="[customLabel]"> Label <input property="customLabel" list="label-suggestions"></label>
-				<meta property="repoDefault" content="[trim(url('repo') or 'mavoweb/mavo')]">
+				<meta property="repoDefault" content="[(url('repo') or 'mavoweb/mavo').trim()]">
 				<meta property="repo" mv-default="[repoDefault]">
 				<meta property="labels" content="">
 			</form>
@@ -51,7 +46,7 @@
 				Based on [count(issue)] most recently updated issues
 			</summary>
 			<div mv-multiple property="issue">
-				<a class="issue-number" href="https://github.com/[trim(repo)]/issues/[number]" title="[title]" target="_blank">#[number]</a>
+				<a class="issue-number" href="https://github.com/[repo.trim()]/issues/[number]" title="[title]" target="_blank">#[number]</a>
 				took
 				<span property="timeToClose" mv-attribute="content" content="[closed_at - created_at]" class="[if(timeToClose > month(), 'long', if (timeToClose < day(), 'short'))]">[duration(timeToClose)]</span>
 			</div>
