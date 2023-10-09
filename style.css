@@ -87,7 +87,7 @@ summary {
 	margin-bottom: .5em;
 	font-style: italic;
 	color: hsl(220, 10%, 50%);
-	--summary-stops: var(--short-color) calc(var(--short, 0) * 1%), hsl(220, 10%, 75%) 0, hsl(220, 10%, 75%) calc(100% - var(--long, 0) * 1%), var(--long-color) 0;
+	--summary-stops: var(--long-color) calc(var(--long, 0) * 1%), hsl(220, 10%, 75%) 0, hsl(220, 10%, 75%) calc(100% - var(--short, 0) * 1%), var(--short-color) 0;
 
 }
 
