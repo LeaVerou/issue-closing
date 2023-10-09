@@ -1,7 +1,7 @@
 body {
 	font: 100%/1.5 Helvetica, Segoe UI, sans-serif;
-	--long-color: hsl(80, 80%, 35%);
-	--short-color: hsl(0, 100%, 45%);
+	--long-color: hsl(0, 100%, 45%);
+	--short-color: hsl(80, 80%, 35%);
 }
 
 h1 {
@@ -87,7 +87,7 @@ summary {
 	margin-bottom: .5em;
 	font-style: italic;
 	color: hsl(220, 10%, 50%);
-	--summary-stops: var(--short-color) calc(var(--short, 0) * 1%), hsl(220, 10%, 75%) 0, hsl(220, 10%, 75%) calc(100% - var(--long, 0) * 1%), var(--long-color) 0;
+	--summary-stops: var(--long-color) calc(var(--long, 0) * 1%), hsl(220, 10%, 75%) 0, hsl(220, 10%, 75%) calc(100% - var(--short, 0) * 1%), var(--short-color) 0;
 
 }
 
